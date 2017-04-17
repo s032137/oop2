@@ -1,19 +1,19 @@
-
 package employee;
 
-abstract class Employee{
-    private String StaffID;
-    private String name;
-    private int age;
-    private String gender;
-    private String mobileNo;
-    private String post;
-    private String address;
-    private int salary;
-    private int mpf;
+public abstract class Employee{
+    protected String staffID;
+    protected String name;
+    protected int age;
+    protected String gender;
+    protected String mobileNo;
+    protected String post;
+    protected String address;
+    protected int salary;
+    protected int mpf;
+    
     
     public Employee(String staffID, String name, int age, String gender, String mobileNo, String post, String address, int salary, int mpf ) {
-        this.StaffID = staffID;
+        this.staffID = staffID;
         this.name    = name;
         this.age     = age;
         this.gender  = gender;
@@ -22,8 +22,6 @@ abstract class Employee{
         this.address  = address;
         this.mpf      = mpf;
         setSalary(salary);
-        
-    
     }
     
     public String getStaffID() {return StaffID;}
@@ -48,15 +46,27 @@ abstract class Employee{
         return true;
     }
     
-    public String getDistrict () {return address;}
-    
-    public boolean isDistrict (String districtCheck) {
-        
+    //District
+    public boolean isDistrict(String district){
+        boolean result = false;
+        String[] districts = address.split(",");
+        String lDistrict = districts[districts.length - 2];
+        if(lDistrict.equals(district)){
+            result = true;
+        }
+        return result;
     }
     
-    public abstract void increaseSalary(double percentage){
+    public abstract void increaseSalary(double percentage);
     
-    
+    public String toString(){
+        return staffID + name + age + gender + mobileNo + post + address + salary + mpf;
     }
+    
 }
+
+
+
+
+
 
