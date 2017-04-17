@@ -36,23 +36,38 @@ public abstract class Employee{
     
     public void setSalary(int salary) {this.salary = salary;}
     
-    public boolean isName(String check, char ch) {
-
-        for (int i=0; i<name.length(); i++) {
-            if (name.charAt(i) != check.charAt(i) && ch != check.charAt(i)) {
-                return false;
+    //check name
+    
+    public boolean isName(String nameCheck) {
+        try{
+            for (int i = 0; i < nameCheck.length(); i ++) {
+                if (nameCheck.charAt(i) == '?') {
+                    continue;
+                }
+                if(name.charAt(i) != nameCheck.charAt(i)){
+                    return false;
+                }
+            }  
+            } catch (Exception e) {
+                    System.err.println("isNmae Exception:"+ e.getMessage());
+                    return false;
             }
+            return true;
         }
-        return true;
-    }
+    
     
     //District
     public boolean isDistrict(String district){
         boolean result = false;
-        String[] districts = address.split(",");
-        String lDistrict = districts[districts.length - 2];
-        if(lDistrict.equals(district)){
-            result = true;
+        try{
+            String[] districts = address.split(",");
+            String lDistrict = districts[districts.length - 2];
+            if(lDistrict.equals(district)){
+                result = true;
+            }
+            return result;
+        }catch (Exception e){
+            System.err.println("isDistrict Exception:"+ e.getMessage());
         }
         return result;
     }
