@@ -1,5 +1,4 @@
 
-
 public abstract class Employee{
     protected String staffID;
     protected String name;
