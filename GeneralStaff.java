@@ -1,4 +1,3 @@
-package employee;
 
 public class GeneralStaff extends Employee {
     private int bonus;
@@ -10,11 +9,15 @@ public class GeneralStaff extends Employee {
     
     public int getBonus() {return bonus;}
     
-    public void increaseSalary(double percentage{
-        
+    public void increaseSalary(double percentage){  
+        double s=(double)salary;
+        s = s * percentage; 
+        salary = (int)s;
     }
     
+    public int getSalary() {return salary;}
+    
     public String toString(){
-       return super.toString() + bonus;
+       return super.toString()+"," + bonus;
     }
 }

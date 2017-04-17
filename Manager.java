@@ -1,4 +1,4 @@
-package employee;
+
 
 public class Manager extends Employee{
     private int houseAllow;
@@ -16,11 +16,13 @@ public class Manager extends Employee{
     public int getHouseAllow() {return houseAllow;}
     public int getTravelAllow() {return travelAllow;}
     
-    public void increaseSalary(double percentage{
-        
+    public void increaseSalary(double percentage){
+        double s=(double)salary;
+        s = s * percentage; 
+        salary = (int)s;
     }
     
     public String toString(){
-        return super.toString() + houseAllow + travelAllow;
+        return super.toString()+"," + houseAllow+"," + travelAllow;
     }
 }

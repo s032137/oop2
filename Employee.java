@@ -1,4 +1,4 @@
-package employee;
+
 
 public abstract class Employee{
     protected String staffID;
@@ -24,7 +24,7 @@ public abstract class Employee{
         setSalary(salary);
     }
     
-    public String getStaffID() {return StaffID;}
+    public String getStaffID() {return staffID;}
     public String getName() {return name;}
     public String getGender() {return gender;}
     public int getAge() {return age;}
@@ -60,7 +60,7 @@ public abstract class Employee{
     public abstract void increaseSalary(double percentage);
     
     public String toString(){
-        return staffID + name + age + gender + mobileNo + post + address + salary + mpf;
+        return staffID +","+ name+","+ age+"," + gender+"," + mobileNo+"," + post+"," + address+"," + salary+"," + mpf;
     }
     
 }
