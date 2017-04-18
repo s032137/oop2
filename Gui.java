@@ -1,8 +1,13 @@
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Date;
+import java.text.*;
 import javax.swing.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 
@@ -30,7 +35,10 @@ public class Gui {
       mainFrame.add(controlPanel);
     }
     
-     public void contentObjects() {
+    
+     public void contentObjects() throws IOException {
+         
+         //Initialize GUI objects
          JLabel sidLabel = new JLabel("Staff ID: ");
          final JTextField sidText = new JTextField(1);
          JLabel nameLabel = new JLabel("Name: ");
@@ -60,9 +68,16 @@ public class Gui {
          JButton addGen = new JButton("Add general staff");
          JButton showRecord = new JButton("Show record");
          
+         //Initialize an employee object array
          ArrayList<Employee> emp = new ArrayList<Employee>();
          
          
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd-HH-mm-ss");
+        String filename = dateFormat.format(currentDate) + ".dat";
+        
+         
+        //Button action for adding manager information
             addMan.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     try {
@@ -73,6 +88,8 @@ public class Gui {
                                    mobileText.getText(), postText.getText(), addressText.getText(), 
                                    Integer.parseInt(salaryText.getText()), Integer.parseInt(mpfText.getText()),
                                    Integer.parseInt(haText.getText()), Integer.parseInt(taText.getText())));
+                           
+                           writeDat(filename, emp.get(emp.size()-1).toString());
                            JOptionPane.showMessageDialog(mainFrame, emp.get(emp.size()-1));
                         } else {
                            JOptionPane.showMessageDialog(mainFrame, "You are not entering manager information.");
@@ -88,7 +105,7 @@ public class Gui {
                 }
             });
             
-
+            //Button action for adding general staff information
             addGen.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     try {
@@ -99,6 +116,7 @@ public class Gui {
                                    mobileText.getText(), postText.getText(), addressText.getText(), 
                                    Integer.parseInt(salaryText.getText()), Integer.parseInt(mpfText.getText()),
                                    Integer.parseInt(bonusText.getText())));
+                           writeDat(filename, emp.get(emp.size()-1).toString());
                            JOptionPane.showMessageDialog(mainFrame, emp.get(emp.size()-1));
                         } else {
                            JOptionPane.showMessageDialog(mainFrame, "You are not entering general staff information.");
@@ -114,30 +132,37 @@ public class Gui {
             });
          
             
-         
+         //Button action for showing current employees' information
          showRecord.addActionListener(new ActionListener() {
-         public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(mainFrame, empRecord(emp));
-         }
-      });
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(mainFrame, empRecord(emp));
+            }
+         });
          
+         
+         
+         //Statements for importing .dat files
           final JFileChooser fileDialog = new JFileChooser();
           FileNameExtensionFilter filter = new FileNameExtensionFilter(".dat files", "dat");
           fileDialog.setFileFilter(filter);
           
           JButton showFileDialogButton = new JButton("Open File");
           showFileDialogButton.addActionListener(new ActionListener() {
-         @Override
          public void actionPerformed(ActionEvent e) {
             int returnVal = fileDialog.showOpenDialog(mainFrame);
             
             if (returnVal == JFileChooser.APPROVE_OPTION) {
-               java.io.File file = fileDialog.getSelectedFile();
+                try {
+                    File file = fileDialog.getSelectedFile();
+                     JOptionPane.showMessageDialog(mainFrame, readDat(emp, file, filename));
+                } catch (IOException ex) {
+                    Logger.getLogger(Gui.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }      
          }
       });
-      
-         
+          
+        //Statements for setting the location of the GUI objects
         controlPanel.setLayout(new GridBagLayout());
         mainFrame.getContentPane().add(controlPanel);
         GridBagConstraints left = new GridBagConstraints();
@@ -147,6 +172,7 @@ public class Gui {
         right.fill = GridBagConstraints.HORIZONTAL;
         right.gridwidth = GridBagConstraints.REMAINDER;
 
+        //Display GUI objects
         controlPanel.add(showFileDialogButton);
         controlPanel.add(sidLabel, left);
         controlPanel.add(sidText, right);
@@ -180,7 +206,49 @@ public class Gui {
         mainFrame.setVisible(true);
          
      }
+     
+     //Method for getting information from a dat file
+     public String readDat(ArrayList<Employee> emp, File file, String filename) throws FileNotFoundException, IOException {
+         BufferedReader reader = new BufferedReader(new FileReader(file));
+         String line = reader.readLine();
+         while (line != null) {
+            String [] parts = line.split(";");
+            char c  = parts[0].toUpperCase().charAt(0);
+            switch (c) {
+                case 'M':
+                    emp.add(new Manager(parts[0], parts[1], 
+                                   Integer.parseInt(parts[2]), parts[3], 
+                                   parts[4], parts[5], parts[6], 
+                                   Integer.parseInt(parts[7]), Integer.parseInt(parts[8]),
+                                   Integer.parseInt(parts[9]), Integer.parseInt(parts[10])));
+                    writeDat(filename, emp.get(emp.size()-1).toString());
+                    break;
+                    
+                case 'G':
+                    emp.add(new GeneralStaff(parts[0], parts[1], 
+                                   Integer.parseInt(parts[2]), parts[3], 
+                                   parts[4], parts[5], parts[6], 
+                                   Integer.parseInt(parts[7]), Integer.parseInt(parts[8]),
+                                   Integer.parseInt(parts[9])));
+                    writeDat(filename, emp.get(emp.size()-1).toString());
+                    break;
+                default:
+                    return "Error!";
+            }
+            line = reader.readLine();
+         }
+         return "File has been read.";
+     }
+     
+     //Method for adding information into a dat file
+     public void writeDat(String filename, String empINFO) throws IOException {
+         BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true));
+         writer.append(empINFO);
+         writer.newLine();
+         writer.close();
+     }
     
+    //A method for showing the details of all the employee objects
     public String empRecord(ArrayList<Employee> emp) {
         if (emp.size() == 0) {
             return "No record.";

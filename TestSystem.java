@@ -1,5 +1,8 @@
+
+import java.io.IOException;
+
 public class TestSystem {
-   public static void main(String args[]){
+   public static void main(String args[]) throws IOException{
 
        Employee Man1 = new Manager("M000003", "CHIU Shun Kin", 33, "Male", "95515368", "HR Manager", "Room B,27/F,234 Chu Wing Street,Hung Hom,Kowloon", 115000, 5750, 11500, 11500);
 
