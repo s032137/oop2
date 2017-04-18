@@ -3,6 +3,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import java.io.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 
@@ -120,7 +121,10 @@ public class Gui {
          }
       });
          
-          final JFileChooser  fileDialog = new JFileChooser();
+          final JFileChooser fileDialog = new JFileChooser();
+          FileNameExtensionFilter filter = new FileNameExtensionFilter(".dat files", "dat");
+          fileDialog.setFileFilter(filter);
+          
           JButton showFileDialogButton = new JButton("Open File");
           showFileDialogButton.addActionListener(new ActionListener() {
          @Override
