@@ -18,6 +18,6 @@ public class GeneralStaff extends Employee {
     public int getSalary() {return salary;}
     
     public String toString(){
-       return super.toString()+"," + bonus;
+       return super.toString()+";" + bonus;
     }
 }

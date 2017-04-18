@@ -75,7 +75,7 @@ public abstract class Employee{
     public abstract void increaseSalary(double percentage);
     
     public String toString(){
-        return staffID +","+ name+","+ age+"," + gender+"," + mobileNo+"," + post+"," + address+"," + salary+"," + mpf;
+        return staffID +";"+ name+";"+ age+";" + gender+";" + mobileNo+";" + post+";" + address+";" + salary+";" + mpf;
     }
     
 }

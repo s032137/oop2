@@ -23,6 +23,6 @@ public class Manager extends Employee{
     }
     
     public String toString(){
-        return super.toString()+"," + houseAllow+"," + travelAllow;
+        return super.toString()+";" + houseAllow+";" + travelAllow;
     }
 }
