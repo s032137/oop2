@@ -6,8 +6,6 @@ import java.util.Date;
 import java.text.*;
 import javax.swing.*;
 import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 
@@ -15,9 +13,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Gui {
     private JFrame mainFrame;
-    //private JLabel headerLabel;
-    //private JLabel statusLabel;
-    private JPanel controlPanel;
+    private JLabel titleLabel;
+    private JMenuBar menuBar;
+    private String filename;
     
     public Gui() {
         prepareGUI();
@@ -29,44 +27,121 @@ public class Gui {
       mainFrame.setResizable(false);
       mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       
-      controlPanel = new JPanel();
-      controlPanel.setLayout(new FlowLayout());
-
-      mainFrame.add(controlPanel);
+      //testing
+      mainFrame.setLayout(new GridLayout(14,1));
+      titleLabel = new JLabel("HR System", JLabel.CENTER);
+      
+      
     }
     
     
-     public void contentObjects() throws IOException {
+    public void contentObjects() throws IOException {
          
          //Initialize GUI objects
-         JLabel sidLabel = new JLabel("Staff ID: ");
-         final JTextField sidText = new JTextField(1);
-         JLabel nameLabel = new JLabel("Name: ");
-         final JTextField nameText = new JTextField(3);
-         JLabel ageLabel = new JLabel("Age: ");
-         final JTextField ageText = new JTextField(3);
-         JLabel genderLabel = new JLabel("Gender: ");
-         final JTextField genderText = new JTextField(3);
-         JLabel mobileLabel = new JLabel("Mobile number: ");
-         final JTextField mobileText = new JTextField(3);
-         JLabel postLabel = new JLabel("Post: ");
-         final JTextField postText = new JTextField(3);
-         JLabel addressLabel = new JLabel("Address: ");
-         final JTextField addressText = new JTextField(3);
-         JLabel salaryLabel = new JLabel("Salary: ");
-         final JTextField salaryText = new JTextField(3);
-         JLabel mpfLabel = new JLabel("MPF: ");
-         final JTextField mpfText = new JTextField(3);
-         JLabel bonusLabel = new JLabel("Bonus: ");
-         final JTextField bonusText = new JTextField(3);
-         JLabel haLabel = new JLabel("Housing Allowance: ");
-         final JTextField haText = new JTextField(3);
-         JLabel taLabel = new JLabel("Travelling Allowrance: ");
-         final JTextField taText = new JTextField(3);
+         menuBar = new JMenuBar();
+         JMenu fileMenu = new JMenu("File");
+         JMenuItem openFile = new JMenuItem("Open");
+         openFile.setMnemonic(KeyEvent.VK_O);
+         openFile.setActionCommand("Open");
+         JMenuItem exit = new JMenuItem("Exit");
+         exit.setActionCommand("Exit");
+         fileMenu.add(openFile);
+         fileMenu.addSeparator();
+         fileMenu.add(exit);
+         menuBar.add(fileMenu);
+         
+         
+         
+         
+         
+         JLabel sidLabel = new JLabel("Staff ID: ", JLabel.CENTER);
+         final JTextField sidText = new JTextField(10);
+         JLabel nameLabel = new JLabel("Name: ", JLabel.CENTER);
+         final JTextField nameText = new JTextField(10);
+         JLabel ageLabel = new JLabel("Age: ", JLabel.CENTER);
+         final JTextField ageText = new JTextField(10);
+         JLabel genderLabel = new JLabel("Gender: ", JLabel.CENTER);
+         final JTextField genderText = new JTextField(10);
+         JLabel mobileLabel = new JLabel("Mobile number: ", JLabel.CENTER);
+         final JTextField mobileText = new JTextField(10);
+         JLabel postLabel = new JLabel("Post: ", JLabel.CENTER);
+         final JTextField postText = new JTextField(10);
+         JLabel addressLabel = new JLabel("Address: ", JLabel.CENTER);
+         final JTextField addressText = new JTextField(10);
+         JLabel salaryLabel = new JLabel("Salary: ", JLabel.CENTER);
+         final JTextField salaryText = new JTextField(10);
+         JLabel mpfLabel = new JLabel("MPF: ", JLabel.CENTER);
+         final JTextField mpfText = new JTextField(10);
+         JLabel bonusLabel = new JLabel("Bonus: ", JLabel.CENTER);
+         final JTextField bonusText = new JTextField(10);
+         JLabel haLabel = new JLabel("Housing Allowance: ", JLabel.CENTER);
+         final JTextField haText = new JTextField(10);
+         JLabel taLabel = new JLabel("Travelling Allowrance: ", JLabel.CENTER);
+         final JTextField taText = new JTextField(10);
          
          JButton addMan = new JButton("Add manager");
          JButton addGen = new JButton("Add general staff");
          JButton showRecord = new JButton("Show record");
+         
+         
+         //testing
+
+         
+ 
+         JPanel sidPanel = new JPanel(new GridLayout(0, 2));
+         sidPanel.add(sidLabel);
+         sidPanel.add(sidText);
+         
+         JPanel namePanel = new JPanel(new GridLayout(0, 2));
+         namePanel.add(nameLabel);
+         namePanel.add(nameText);
+         JPanel agePanel = new JPanel(new GridLayout(0, 2));
+         agePanel.add(ageLabel);
+         agePanel.add(ageText);  
+         
+         JPanel genederPanel = new JPanel(new GridLayout(0, 2));
+         genederPanel.add(genderLabel);
+         genederPanel.add(genderText);
+         
+         JPanel mobilePanel = new JPanel(new GridLayout(0, 2));
+         mobilePanel.add(mobileLabel);
+         mobilePanel.add(mobileText);
+         
+         JPanel postPanel = new JPanel(new GridLayout(0, 2));
+         postPanel.add(postLabel);
+         postPanel.add(postText);
+         
+         JPanel addressPanel = new JPanel(new GridLayout(0, 2));
+         addressPanel.add(addressLabel);
+         addressPanel.add(addressText);
+         
+         JPanel salaryPanel = new JPanel(new GridLayout(0, 2));
+         salaryPanel.add(salaryLabel);
+         salaryPanel.add(salaryText);
+         
+         JPanel mpfPanel = new JPanel(new GridLayout(0, 2));
+         mpfPanel.add(mpfLabel);
+         mpfPanel.add(mpfText);
+         
+         JPanel bonusPanel = new JPanel(new GridLayout(0, 2));
+         bonusPanel.add(bonusLabel);
+         bonusPanel.add(bonusText);
+         
+         JPanel haPanel = new JPanel(new GridLayout(0, 2));
+         haPanel.add(haLabel);
+         haPanel.add(haText);
+         
+         JPanel taPanel = new JPanel(new GridLayout(0, 2));
+         taPanel.add(taLabel);
+         taPanel.add(taText);
+         
+         JPanel buttonsPanel = new JPanel(new FlowLayout());
+         buttonsPanel.add(addMan);
+         buttonsPanel.add(addGen);
+         buttonsPanel.add(showRecord);
+         
+         
+
          
          //Initialize an employee object array
          ArrayList<Employee> emp = new ArrayList<Employee>();
@@ -74,141 +149,161 @@ public class Gui {
          
         Date currentDate = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd-HH-mm-ss");
-        String filename = dateFormat.format(currentDate) + ".dat";
-        
+        filename = dateFormat.format(currentDate) + ".dat";
          
         //Button action for adding manager information
-            addMan.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    try {
-                        char s = sidText.getText().charAt(0);
-                        if (Character.toString(s).toUpperCase().contentEquals("M")) {
-                           emp.add (new Manager(sidText.getText(), nameText.getText(), 
-                                   Integer.parseInt(ageText.getText()), genderText.getText(), 
-                                   mobileText.getText(), postText.getText(), addressText.getText(), 
-                                   Integer.parseInt(salaryText.getText()), Integer.parseInt(mpfText.getText()),
-                                   Integer.parseInt(haText.getText()), Integer.parseInt(taText.getText())));
+        addMan.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    char s = sidText.getText().charAt(0);
+                    if (Character.toString(s).toUpperCase().contentEquals("M")) {
+                        emp.add (new Manager(sidText.getText(), nameText.getText(), 
+                        Integer.parseInt(ageText.getText()), genderText.getText(), 
+                        mobileText.getText(), postText.getText(), addressText.getText(), 
+                        Integer.parseInt(salaryText.getText()), Integer.parseInt(mpfText.getText()),
+                        Integer.parseInt(haText.getText()), Integer.parseInt(taText.getText())));
                            
-                           writeDat(filename, emp.get(emp.size()-1).toString());
-                           JOptionPane.showMessageDialog(mainFrame, emp.get(emp.size()-1));
-                        } else {
-                           JOptionPane.showMessageDialog(mainFrame, "You are not entering manager information.");
-                        }
-                    } catch (StringIndexOutOfBoundsException ex) {
-                        JOptionPane.showMessageDialog(mainFrame, "Staff ID is empty. ", "Staff ID error", JOptionPane.ERROR_MESSAGE);
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(mainFrame, "You have not finished the form. ", "Empty input", JOptionPane.ERROR_MESSAGE);
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(mainFrame, ex);
-                        taText.requestFocus();
-                    } 
-                }
-            });
-            
-            //Button action for adding general staff information
-            addGen.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    try {
-                        char s = sidText.getText().charAt(0);
-                        if (Character.toString(s).toUpperCase().contentEquals("G")) {
-                           emp.add(new GeneralStaff(sidText.getText(), nameText.getText(), 
-                                   Integer.parseInt(ageText.getText()), genderText.getText(), 
-                                   mobileText.getText(), postText.getText(), addressText.getText(), 
-                                   Integer.parseInt(salaryText.getText()), Integer.parseInt(mpfText.getText()),
-                                   Integer.parseInt(bonusText.getText())));
-                           writeDat(filename, emp.get(emp.size()-1).toString());
-                           JOptionPane.showMessageDialog(mainFrame, emp.get(emp.size()-1));
-                        } else {
-                           JOptionPane.showMessageDialog(mainFrame, "You are not entering general staff information.");
-                        }
-                    } catch (StringIndexOutOfBoundsException ex) {
-                        JOptionPane.showMessageDialog(mainFrame, "Staff ID is empty. ", "Staff ID error", JOptionPane.ERROR_MESSAGE);
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(mainFrame, "You have not finished the form. ", "Empty input", JOptionPane.ERROR_MESSAGE);
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(mainFrame, ex);
+                        writeDat(filename, emp.get(emp.size()-1).toString());
+                        
+                        JOptionPane.showMessageDialog(mainFrame, emp.get(emp.size()-1));
+                        sidText.setText("");
+                        nameText.setText("");
+                        ageText.setText("");
+                        genderText.setText("");
+                        mobileText.setText("");
+                        postText.setText("");
+                        addressText.setText("");
+                        salaryText.setText("");
+                        mpfText.setText("");
+                        bonusText.setText("");
+                        haText.setText("");
+                        taText.setText("");
+                    } else {
+                        JOptionPane.showMessageDialog(mainFrame, "You are not entering manager information.");
                     }
+                } catch (StringIndexOutOfBoundsException ex) {
+                    JOptionPane.showMessageDialog(mainFrame, "Staff ID is empty. ", "Staff ID error", JOptionPane.ERROR_MESSAGE);
+                    sidText.requestFocus();
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(mainFrame, "You have not finished the form. ", "Empty input", JOptionPane.ERROR_MESSAGE);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(mainFrame, ex);
+                } 
+            }
+        });
+            
+        //Button action for adding general staff information
+        addGen.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    char s = sidText.getText().charAt(0);
+                    if (Character.toString(s).toUpperCase().contentEquals("G")) {
+                        
+                        emp.add (new GeneralStaff(sidText.getText(), nameText.getText(), 
+                        Integer.parseInt(ageText.getText()), genderText.getText(), 
+                        mobileText.getText(), postText.getText(), addressText.getText(), 
+                        Integer.parseInt(salaryText.getText()), Integer.parseInt(mpfText.getText()),
+                        Integer.parseInt(bonusText.getText())));
+                        
+                        writeDat(filename, emp.get(emp.size()-1).toString());
+                        JOptionPane.showMessageDialog(mainFrame, emp.get(emp.size()-1));
+                           
+                        sidText.setText("");
+                        nameText.setText("");
+                        ageText.setText("");
+                        genderText.setText("");
+                        mobileText.setText("");
+                        postText.setText("");
+                        addressText.setText("");
+                        salaryText.setText("");
+                        mpfText.setText("");
+                        bonusText.setText("");
+                        haText.setText("");
+                        taText.setText("");
+                    } else {
+                        JOptionPane.showMessageDialog(mainFrame, "You are not entering general staff information.");
+                        sidText.requestFocus();
+                    }
+                } catch (StringIndexOutOfBoundsException ex) {
+                    JOptionPane.showMessageDialog(mainFrame, "Staff ID is empty. ", "Input Error", JOptionPane.ERROR_MESSAGE);
+                    sidText.requestFocus();
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(mainFrame, "Wrong input", "Input Error", JOptionPane.ERROR_MESSAGE);
+                } catch (HeadlessException | IOException ex) {
+                    JOptionPane.showMessageDialog(mainFrame, ex);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(mainFrame, ex);
                 }
-            });
+            }
+        });
          
             
-         //Button action for showing current employees' information
-         showRecord.addActionListener(new ActionListener() {
+        //Button action for showing current employees' information
+        showRecord.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(mainFrame, empRecord(emp));
             }
-         });
+        });
          
          
          
-         //Statements for importing .dat files
-          final JFileChooser fileDialog = new JFileChooser();
-          FileNameExtensionFilter filter = new FileNameExtensionFilter(".dat files", "dat");
-          fileDialog.setFileFilter(filter);
-          
-          JButton showFileDialogButton = new JButton("Open File");
-          showFileDialogButton.addActionListener(new ActionListener() {
-         public void actionPerformed(ActionEvent e) {
-            int returnVal = fileDialog.showOpenDialog(mainFrame);
-            
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                try {
-                    File file = fileDialog.getSelectedFile();
-                     JOptionPane.showMessageDialog(mainFrame, readDat(emp, file, filename));
-                } catch (IOException ex) {
-                    Logger.getLogger(Gui.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }      
-         }
-      });
-          
-        //Statements for setting the location of the GUI objects
-        controlPanel.setLayout(new GridBagLayout());
-        mainFrame.getContentPane().add(controlPanel);
-        GridBagConstraints left = new GridBagConstraints();
-        left.anchor = GridBagConstraints.EAST;
-        GridBagConstraints right = new GridBagConstraints();
-        right.weightx = 2.0;
-        right.fill = GridBagConstraints.HORIZONTAL;
-        right.gridwidth = GridBagConstraints.REMAINDER;
-
-        //Display GUI objects
-        controlPanel.add(showFileDialogButton);
-        controlPanel.add(sidLabel, left);
-        controlPanel.add(sidText, right);
-        controlPanel.add(nameLabel, left);
-        controlPanel.add(nameText, right);
-        controlPanel.add(ageLabel, left);
-        controlPanel.add(ageText, right);
-        controlPanel.add(genderLabel, left);
-        controlPanel.add(genderText, right);
-        controlPanel.add(mobileLabel, left);
-        controlPanel.add(mobileText, right);
-        controlPanel.add(postLabel, left);
-        controlPanel.add(postText, right);
-        controlPanel.add(addressLabel, left);
-        controlPanel.add(addressText, right);
-        controlPanel.add(salaryLabel, left);
-        controlPanel.add(salaryText, right);
-        controlPanel.add(mpfLabel, left);
-        controlPanel.add(mpfText, right);
-        controlPanel.add(bonusLabel, left);
-        controlPanel.add(bonusText, right);
-        controlPanel.add(haLabel, left);
-        controlPanel.add(haText, right);
-        controlPanel.add(taLabel, left);
-        controlPanel.add(taText, right);
-        controlPanel.add(addMan);
-        controlPanel.add(addGen);
-        controlPanel.add(showRecord);
+        //Statements for importing .dat files
+        final JFileChooser fileDialog = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(".dat files", "dat");
+        fileDialog.setFileFilter(filter);
         
+        //The action method of the open menu item within the file menu
+        openFile.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int returnVal = fileDialog.showOpenDialog(mainFrame);
+            
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    try {
+                        File file = fileDialog.getSelectedFile();
+                        filename = fileDialog.getSelectedFile().toString();
+                        JOptionPane.showMessageDialog(mainFrame, readDat(emp, file));
+                    } catch (IOException ex) {
+                        JOptionPane.showMessageDialog(mainFrame, ex.getMessage());
+                    }
+                }      
+             }
+          });
+        
+        //The action method of the exit menu item within the file menu
+        exit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
          
+        mainFrame.setJMenuBar(menuBar);
+        mainFrame.add(titleLabel);
+        mainFrame.add(sidPanel);
+        mainFrame.add(namePanel);
+        mainFrame.add(agePanel);
+        mainFrame.add(genederPanel);
+        mainFrame.add(mobilePanel);
+        mainFrame.add(postPanel);
+        mainFrame.add(addressPanel);
+        mainFrame.add(salaryPanel);
+        mainFrame.add(mpfPanel);
+        mainFrame.add(bonusPanel);
+        mainFrame.add(haPanel);
+        mainFrame.add(taPanel);
+        
+        
+        
+        
+        
+        
+        mainFrame.add(buttonsPanel);
         mainFrame.setVisible(true);
          
      }
      
      //Method for getting information from a dat file
-     public String readDat(ArrayList<Employee> emp, File file, String filename) throws FileNotFoundException, IOException {
+     public String readDat(ArrayList<Employee> emp, File file) throws FileNotFoundException, IOException {
+         emp.clear();
          BufferedReader reader = new BufferedReader(new FileReader(file));
          String line = reader.readLine();
          while (line != null) {
@@ -221,7 +316,6 @@ public class Gui {
                                    parts[4], parts[5], parts[6], 
                                    Integer.parseInt(parts[7]), Integer.parseInt(parts[8]),
                                    Integer.parseInt(parts[9]), Integer.parseInt(parts[10])));
-                    writeDat(filename, emp.get(emp.size()-1).toString());
                     break;
                     
                 case 'G':
@@ -230,7 +324,6 @@ public class Gui {
                                    parts[4], parts[5], parts[6], 
                                    Integer.parseInt(parts[7]), Integer.parseInt(parts[8]),
                                    Integer.parseInt(parts[9])));
-                    writeDat(filename, emp.get(emp.size()-1).toString());
                     break;
                 default:
                     return "Error!";
@@ -250,7 +343,7 @@ public class Gui {
     
     //A method for showing the details of all the employee objects
     public String empRecord(ArrayList<Employee> emp) {
-        if (emp.size() == 0) {
+        if (emp.isEmpty()) {
             return "No record.";
         } else {
             String record = "The sample records of the employees are shown below: \n";
@@ -260,4 +353,18 @@ public class Gui {
             return record;
         }
     }
-}
+    
+    public static String checkTextfield(JFrame frame, JLabel label, JTextField textfield, String datatype) throws Exception{
+        try {
+            if (textfield.getText().isEmpty()) {
+                throw new StringIndexOutOfBoundsException(label.getText().substring(0, label.getText().length()-2) + " is empty");
+            }
+        } catch (StringIndexOutOfBoundsException ex) {
+            JOptionPane.showMessageDialog(frame, ex.getMessage(), "Input error", JOptionPane.ERROR_MESSAGE);
+            textfield.requestFocus();
+        } 
+        return textfield.getText();
+    }
+            
+} 
+          
